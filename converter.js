@@ -1,3 +1,4 @@
+
 function rgbToHsv(r, g, b) {
     if(r >= 0 && r <= 255 && g >= 0 && g <= 255 && b >= 0 && b <= 255) {
         var newR = r/225
@@ -14,7 +15,7 @@ function rgbToHsv(r, g, b) {
             hue = 0
         }
         else if(cMax == newR){
-            hue = 60 * (Math.mod(((newG-newB)/delta),6))
+            hue = 60 * ((((newG-newB)/delta) % 6))
         }
         else if(cMax == newG){
             hue = 60 * (((newB - newR)/delta) + 2)
@@ -39,7 +40,8 @@ function rgbToHsv(r, g, b) {
     }
 
     const hsvConverted = [hue, saturation, value]
-
+    console.log(hsvConverted)
+    
     return hsvConverted;
 }
 
@@ -53,7 +55,7 @@ function hsvToRgb(h, s, v) {
     var answerArray = []
 
     c = v * s
-    x = c * (1 - Math.abs(Math.mod((h/60), 2) - 1))
+    x = c * (1 - Math.abs(((h/60) % 2) - 1))
     m = v - c
 
     if(h >= 0 && h < 60){
@@ -91,20 +93,28 @@ function hsvToRgb(h, s, v) {
 
     const rgbConverted = [answerArray[0], answerArray[1], answerArray[2]]
     
+    console.log(rgbConverted)
     return rgbConverted;
 }
 
 function startProg() {
-    var firstConvDesicion = prompt("What conversion would you like to use?\n 1. RGB to HSV\n 2. HSV to RGB\n digite el número")
+    var firstConvDesicion = prompt("Qué conversión quiere utilizar?\n 1. RGB to HSV\n 2. HSV to RGB\n Digite el número: ")
 
     if (firstConvDesicion == 1){
         var red = prompt("Ingrese el valor rojo: ")
         var green = prompt("Ingrese el valor verde: ")
         var blue = prompt("Ingrese el valor azul: ")
+        
         rgbToHsv(red, green, blue)
+        startProg()
     }
     else if(firstConvDesicion == 2){
-        console.log("wow")
+        var h = prompt("Ingrese el valor de matiz (hue): ")
+        var s = prompt("Ingrese el valor de saturacion: ")
+        var v = prompt("Ingrese el valor de valor: ")
+
+        hsvToRgb(h, s, v)
+        startProg()
     }
     else {
         console.error("INVALID INPUT")
