@@ -1,4 +1,4 @@
-#  modelos de representación de objetos
+#  Modelos de Representación de Objetos
 
 Laboratorio #4 Computación Grafica -  Univalle 2022
 
